@@ -1,0 +1,11 @@
+Number of users collected: 177
+Number of messages collected: 1986
+Number of communities discovered: 3
+Average number of users per community: 54.0
+Number of instances per class found:
+Positive: 1529  Negative: 457
+One example from each class: 
+Result is Positive
+Message: RT @ChicagoBears: .@JerrellFreeman discusses return of McPhee, Goldman, prepping for Bucs offense. #CHIvsTB
+
+📺: https://t.co/ER5Fjekahb htt…

@@ -1,0 +1,74 @@
+Grade: 43.00/50.00
+
+2 Deduction(s):
+
+--------------
+#1: 3.00 points
+Failing test: test_classify_3: 
+        @points=3
+        
+Traceback (most recent call last):
+  File "../assignments-sol/a2/a2_test.py", line 148, in test_classify_3
+    self.assertEqual(top_c[0][0], 'token=great')
+AssertionError: 'token=bad' != 'token=great'
+- token=bad
++ token=great
+
+
+source:
+    def test_classify_3(self):
+         """
+         @points=3
+         """
+         docs = np.array(["Isn't this movie great?", "Horrible, horrible movie",
+                          "Isn't this movie great?", "Horrible, horrible movie",
+                          'i LOVE this great movie', 'i LOVE this wonderful movie',
+                          'i hate this bad movie', 'i hate this horrible movie'])
+         labels = np.array([1, 0, 1, 0, 1, 1, 0, 0])
+         tokens_list = [tokenize(d) for d in docs]
+         feature_fns = [token_features]
+         X, vocab = vectorize(tokens_list, feature_fns, min_freq=1)
+         feature_fns = [token_features, lexicon_features]
+         clf = LogisticRegression()
+         clf.fit(X, labels)
+         top_c = top_coefs(clf, 1, 2, vocab)
+         self.assertEqual(top_c[0][0], 'token=great')
+ 
+         predictions = clf.predict(X)
+         self.assertEqual(round(accuracy_score(labels, predictions), 1), 1.0)
+--------------
+
+--------------
+#2: 4.00 points
+Failing test: test_tokenize_2: 
+        @points=4
+        
+Traceback (most recent call last):
+  File "../assignments-sol/a2/a2_test.py", line 27, in test_tokenize_2
+    ['hi', 'there', 'super-duper'])
+AssertionError: Lists differ: ['hi', 'there', 'super', 'duper'] != ['hi', 'there', 'super-duper']
+
+First differing element 2:
+super
+super-duper
+
+First list contains 1 additional elements.
+First extra element 3:
+duper
+
+- ['hi', 'there', 'super', 'duper']
+?                       ^^^^
+
++ ['hi', 'there', 'super-duper']
+?                       ^
+
+
+source:
+    def test_tokenize_2(self):
+         """
+         @points=4
+         """
+         self.assertListEqual(list(tokenize("Hi there super-duper!", keep_internal_punct=True)),
+                              ['hi', 'there', 'super-duper'])
+--------------
+

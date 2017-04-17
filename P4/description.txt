@@ -1,0 +1,71 @@
+Introduction:
+
+In this assignment, I am looking into users who are tweeting about Chicago bear (the football team) and implement it mostly by using Twitter API, Networkx, and SKlearn.
+
+In "collect.py", the program collects data by requesting from Twitter.
+
+In "cluster.py", the program reads the data from the previous steps and clusters users into communities. 
+
+In "classify.py", the program reads the data from the first steps and does the sentiment analysis.
+
+
+In "summarize.py", the program reads the data from the previous steps and print out the output.
+
+Goal:
+The ultimate goal for this project is to analyze the mood of people who tweets about Chicago bear.
+
+Data:
+
+● 10 Users tweeting about "Chicago bear"
+● 20 friends of each users, total will be 200 users
+● 200 tweets of each users, total will be 2000 tweets
+
+● Train data is a CSV file with 100 positive tweets and 100 negative tweets which are 200 data in total.
+Data file format has 6 fields:
+0 - the polarity of the tweet (0 = negative, 2 = neutral, 4 = positive)
+1 - the id of the tweet (2087)
+2 - the date of the tweet (Sat May 16 23:58:44 UTC 2009)
+3 - the query (lyx). If there is no query, then this value is NO_QUERY.
+4 - the user that tweeted (robotickilldozr)
+5 - the text of the tweet (Lyx is cool)
+
+I collected the train data from a Stanford University research.
+http://help.sentiment140.com/home
+http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip
+
+Methods:
+
+First, I tried to collect 10 users tweeting about "Chicago bear" and get 20 friends and tweets of each users by using Twitter request.
+So I end up collected 10 users, 200 friends and 2000 tweets. Dump the data into users.txt, friends.txt, and tweets.txt by using pickle.
+
+Second, I load the data (users and their friends) from previous step. Create a Networkx graph with the data. Then I clusters users into communities by using Girvan-Newman.
+In order to implement the algorithm I also use betweenness_centrality from the Networkx library. After clustering, dump the result into sum.txt by using append pickle.
+
+Third, I load the data (users and their tweets) from the first step. Also, I load the train data which was manually pre-labeled tweets and store it by using Pandas. Then use the TfidfVectorize, SVM, and  classification_report from SKlearn.
+Then I use TfidfVectorizer, svm with linear kernel to do the fit.
+(http://scikit-learn.org/stable/modules/svm.html)
+After classifying, dump the result into sum.txt by using append pickle.
+
+Last, I print the results by loading sum.txt.
+
+
+Conclusion:
+At first, I was thinking about using AFINN to do the Lexicon. The reason that I decided not to use it is because that those lexicon dictionary doesn't work properly with my method.
+Though it covers a lot of common words people use.
+And Instead of using nltk, I feel like Sklearn might be a easier option.
+
+In the result, sometimes, I can only get less tweets and users than what I expected. 
+Later on, I realized that it was because that users might not have enough tweets or followers
+than I expected.
+
+The sentiment analysis may give a emotional orientation. However, it can not distinguish whether the tweet is just an event information. Therefore, this might cause some of the tweets are misclassified.
+
+
+
+
+
+
+
+
+
+
