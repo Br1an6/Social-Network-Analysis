@@ -1,6 +1,6 @@
 Introduction:
 
-In this assignment, I am looking into users who are tweeting about Chicago bear (the football team) and implement it mostly by using Twitter API, Networkx, and SKlearn.
+In this project, I am looking into users who are tweeting about Chicago bear (the football team) and implement it mostly by using Twitter API, Networkx, and SKlearn.
 
 In "collect.py", the program collects data by requesting from Twitter.
 
