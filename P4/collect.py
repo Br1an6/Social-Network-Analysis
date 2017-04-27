@@ -6,10 +6,10 @@ import time
 from TwitterAPI import TwitterAPI
 import pickle
 
-consumer_key = 'VsAo207IoIRF5AASDllD3H7yE'
-consumer_secret = '4bNlsfogEbneVQp1TOLMk1ZGnwjbcqNeN8apiintWoa7bYJrHA'
-access_token = '3164289948-CA0b188o68fVkbWJxXjkX13FnTmoKBplRf0nGZp'
-access_token_secret = 'lz1ZweTDeKjZiBihfKcs2JQA3W58TNJfElqIA3aHYunEY'
+consumer_key = # your token
+consumer_secret = # your token
+access_token = # your token
+access_token_secret = # your token
 
 
 def get_twitter():
