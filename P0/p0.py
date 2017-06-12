@@ -4,7 +4,6 @@
 Collecting a political social network
 """
 
-# Imports you'll need.
 from collections import Counter
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -18,7 +17,6 @@ access_token = # 'Your Token'
 access_token_secret = # 'Your Token'
 
 
-# This method is done for you.
 def get_twitter():
     """ Construct an instance of TwitterAPI using the tokens you entered above.
     Returns:
@@ -41,7 +39,6 @@ def read_screen_names(filename):
     >>> read_screen_names('candidates.txt')
     ['DrJillStein', 'GovGaryJohnson', 'HillaryClinton', 'realDonaldTrump']
     """
-    ### TODO done
     list_user = []
     for i in open(filename, 'r'):
         list_user.append(i)
@@ -51,8 +48,6 @@ def read_screen_names(filename):
     return list_user
     pass
 
-
-# I've provided the method below to handle Twitter's rate limiting.
 # You should call this method whenever you need to access the Twitter API.
 def robust_request(twitter, resource, params, max_tries=5):
     """ If a Twitter request fails, sleep for 15 minutes.
@@ -94,7 +89,6 @@ def get_users(twitter, screen_names):
     >>> [u['id'] for u in users]
     [6253282, 783214]
     """
-    ###TODO done
     return  twitter.request('users/lookup', {'screen_name':screen_names}).json()
     pass
 
@@ -120,7 +114,6 @@ def get_friends(twitter, screen_name):
     >>> get_friends(twitter, 'aronwc')[:5]
     [695023, 1697081, 8381682, 10204352, 11669522]
     """
-    ###TODO done
     list_friends = twitter.request('friends/ids', {'screen_name':screen_name}).json()
     friends = sorted(list_friends['ids'])
     return friends
@@ -145,7 +138,6 @@ def add_all_friends(twitter, users):
     >>> users[0]['friends'][:5]
     [695023, 1697081, 8381682, 10204352, 11669522]
     """
-    ###TODO done
     for x in range(len(users)):
         users[x]['friends'] = get_friends(twitter, users[x]['screen_name'])
 
@@ -162,7 +154,6 @@ def print_num_friends(users):
     Returns:
         Nothing
     """
-    ###TODO done
     for u in users:
         print( "%s %d\n" % (str(u['screen_name']), len(u['friends'])) )
     pass
@@ -181,7 +172,6 @@ def count_friends(users):
     >>> c.most_common()
     [(2, 3), (3, 2), (1, 1)]
     """
-    ###TODO done
     c = Counter()
     for u in users:
         c += Counter(iter(u['friends']))
@@ -211,7 +201,6 @@ def friend_overlap(users):
     ...     ])
     [('a', 'c', 3), ('a', 'b', 2), ('b', 'c', 2)]
     """
-    ###TODO not yet
     overlap_list = []
     for u1 in users:
         for u2 in users:
@@ -260,7 +249,6 @@ def followed_by_hillary_and_donald(users, twitter):
         A string containing the single Twitter screen_name of the user
         that is followed by both Hillary Clinton and Donald Trump.
     """
-    ###TODO done
     id = ""
     for i in users[2]['friends']:
         for n in users[3]['friends']:
@@ -269,7 +257,7 @@ def followed_by_hillary_and_donald(users, twitter):
                 break
 
     match_user = twitter.request('users/lookup', {'user_id':id}).json()
-    return str( '[' + match_user[0]['screen_name'] + ']' )
+    return [match_user[0]['screen_name']]
     pass
 
 
@@ -313,11 +301,8 @@ def draw_network(graph, users, filename):
     nodes should have no labels (to reduce clutter).
 
     Methods you'll need include networkx.draw_networkx, plt.figure, and plt.savefig.
-
-    Your figure does not have to look exactly the same as mine, but try to
-    make it look presentable.
     """
-    ###TODO
+
     label = {n:n if type(n)==str  else '' for n in graph.nodes()}
     plt.figure(figsize=(12,12))
     nx.draw_networkx(graph, node_color='r', labels=label, width=.1, node_size=100)
@@ -329,7 +314,7 @@ def draw_network(graph, users, filename):
 
 
 def main():
-    """ Main method. You should not modify this. """
+    """ Main method"""
     twitter = get_twitter()
     screen_names = read_screen_names('candidates.txt')
     print('Established Twitter connection.')
@@ -353,5 +338,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# That's it for now! This should give you an introduction to some of the data we'll study in this course.
