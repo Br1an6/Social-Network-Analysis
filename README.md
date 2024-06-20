@@ -5,4 +5,4 @@ License
 -------
 
 This software is licensed under the MIT license
-© 2017 Social Network Analysis contributors
+© 2024 Social Network Analysis contributors
